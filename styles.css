@@ -5,6 +5,7 @@
   --medium: #6B7280;
   --light: #F4F4F6;
   --white: #FFFFFF;
+  --surface: #FFFFFF;
 }
 
 * {
@@ -34,9 +35,27 @@ a {
 }
 
 header.hero {
-  background: var(--navy);
+  background: linear-gradient(135deg, #081225 0%, #10264b 45%, #162f56 100%);
   color: var(--white);
-  padding: 24px 28px 48px;
+  padding: 42px 36px 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+header.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% 0 30% -10%;
+  background: radial-gradient(circle at top right, rgba(201,168,76,0.25), transparent 32%);
+  pointer-events: none;
+}
+
+header.hero::after {
+  content: "";
+  position: absolute;
+  inset: 30% 0 -20% -10%;
+  background: radial-gradient(circle at bottom left, rgba(255,255,255,0.08), transparent 28%);
+  pointer-events: none;
 }
 
 .topbar {
@@ -66,13 +85,13 @@ header.hero {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 46px;
   align-items: center;
 }
 
 .hero-copy {
-  max-width: 640px;
+  max-width: 620px;
 }
 
 .label {
@@ -114,6 +133,20 @@ header.hero {
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
+.btn-icon {
+  display: inline-flex;
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
 .btn:hover {
   transform: translateY(-2px);
 }
@@ -126,7 +159,11 @@ header.hero {
 .btn-secondary {
   border: 1px solid rgba(255,255,255,0.9);
   color: var(--white);
-  background: transparent;
+  background: rgba(255,255,255,0.08);
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.16);
 }
 
 .hero-contact {
@@ -154,15 +191,21 @@ header.hero {
   border-radius: 32px;
   object-fit: cover;
   display: block;
-  border: 2px solid rgba(255,255,255,0.18);
+  border: 2px solid rgba(255,255,255,0.22);
+  box-shadow: 0 40px 120px rgba(10, 18, 40, 0.24);
 }
 
 .hero-image-overlay {
   position: absolute;
   inset: 0;
   border-radius: 32px;
-  background: linear-gradient(180deg, rgba(26, 42, 74, 0.00) 0%, rgba(26, 42, 74, 0.34) 65%, rgba(26, 42, 74, 0.62) 100%);
+  background: linear-gradient(180deg, rgba(26, 42, 74, 0.00) 0%, rgba(26, 42, 74, 0.30) 55%, rgba(26, 42, 74, 0.64) 100%);
   pointer-events: none;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
 }
 
 .section {
@@ -238,7 +281,28 @@ header.hero {
   display: grid;
   gap: 24px;
 }
+.section {
+  padding: 72px 28px;
+  position: relative;
+}
 
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 2px;
+  background: rgba(201,168,76,0.14);
+  opacity: 0.6;
+}
+
+.section-white::before,
+.section-light::before,
+.section-dark::before {
+  content: "";
+}
 .cards-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -252,16 +316,43 @@ header.hero {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.gallery-card {
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 16px 45px rgba(26, 42, 74, 0.1);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+.gallery-card p {
+  margin: 0;
+  padding: 18px 16px;
+  font-size: 0.95rem;
+  color: var(--dark);
+}
+
 .card,
 .feature-card,
 .solution-card,
 .metric-card,
 .case-card,
 .timeline-card {
-  border-radius: 18px;
+  border-radius: 22px;
   padding: 24px;
   background: var(--white);
-  box-shadow: 0 18px 50px rgba(26, 42, 74, 0.08);
+  box-shadow: 0 20px 70px rgba(26, 42, 74, 0.08);
+  border: 1px solid rgba(22, 34, 60, 0.08);
 }
 
 .section-dark .card,
@@ -269,7 +360,72 @@ header.hero {
 .section-dark .solution-card,
 .section-dark .timeline-card {
   background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.differentials-panel {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.18), rgba(26, 42, 74, 0.28));
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  border-radius: 32px;
+  padding: 40px;
+}
+
+.differentials-summary {
+  margin-bottom: 32px;
+}
+
+.differentials-summary p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.98);
+  font-size: 1.08rem;
+  line-height: 1.85;
+}
+
+.differentials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.differential-card {
+  position: relative;
+  background: rgba(10, 18, 35, 0.92);
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 36px 90px rgba(0, 0, 0, 0.2);
+}
+
+.differential-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  background: radial-gradient(circle at top left, rgba(201, 168, 76, 0.18), transparent 36%);
+  pointer-events: none;
+}
+
+.card-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+.differential-card h3 {
+  margin: 0 0 14px;
+  color: var(--white);
+}
+
+.differential-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .section-dark .metric-card {
@@ -386,7 +542,8 @@ header.hero {
   .metrics-grid,
   .grid-2,
   .cta-section,
-  .certificates {
+  .certificates,
+  .gallery-grid {
     grid-template-columns: 1fr;
   }
 
